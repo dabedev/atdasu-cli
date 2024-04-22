@@ -7,6 +7,7 @@ use serde::Deserialize;
 struct CommandData {
     name: String,
     shortname: String,
+    description: String,
 }
 
 pub fn load_commands(manager: &mut CommandManager) {
@@ -29,6 +30,7 @@ pub fn load_commands(manager: &mut CommandManager) {
                 let command = Command {
                     name: parsed_data.name,
                     shortname: parsed_data.shortname,
+                    description: parsed_data.description,
                 };
 
                 manager.add_command(command);

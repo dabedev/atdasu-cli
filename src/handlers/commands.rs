@@ -1,11 +1,12 @@
 pub struct Command {
     pub name: String,
     pub shortname: String,
+    pub description: String,
 }
 
 impl Command {
-    pub fn new(name: String, shortname: String) -> Command {
-        Command { name, shortname }
+    pub fn new(name: String, shortname: String, description: String) -> Command {
+        Command { name, shortname, description }
     }
 }
 
