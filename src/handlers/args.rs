@@ -1,7 +1,5 @@
 use std::env;
 
-use crate::handlers::CommandManager;
-
 pub fn get_args() -> Vec<String> {
     let mut arguments: Vec<String> = env::args().collect();
     arguments.remove(0);
