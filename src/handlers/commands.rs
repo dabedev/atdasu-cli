@@ -21,10 +21,17 @@ impl CommandManager {
 
 pub trait Manager {
     fn add_command(&mut self, cmd: Command);
+    fn get_command(&self, arg: String) -> Option<&Command>;
 }
 
 impl Manager for CommandManager {
     fn add_command(&mut self, cmd: Command) {
         self.commands.push(cmd);
+    }
+
+    fn get_command(&self, arg: String) -> Option<&Command> {
+        let predicate = |cmd: &&Command| (cmd.name == arg || cmd.shortname == arg);
+        let cmd: &&Command = &self.commands.iter().find(predicate).unwrap();
+        Some(cmd)
     }
 }
