@@ -1,3 +1,3 @@
 pub mod test;
 
-pub use test::main;
+pub use test::test;

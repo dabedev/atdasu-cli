@@ -30,8 +30,10 @@ impl Manager for CommandManager {
     }
 
     fn get_command(&self, arg: String) -> Option<&Command> {
-        let predicate = |cmd: &&Command| (cmd.name == arg || cmd.shortname == arg);
-        let cmd: &&Command = &self.commands.iter().find(predicate).unwrap();
+        let cmd_arg: String = arg.clone();
+        let predicate = |cmd: &&Command| (cmd.name == cmd_arg || cmd.shortname == cmd_arg);
+        let unknown_msg: String = format!("Unknown command: {}", cmd_arg);
+        let cmd: &&Command = &self.commands.iter().find(predicate).expect(&unknown_msg);
         Some(cmd)
     }
 }
