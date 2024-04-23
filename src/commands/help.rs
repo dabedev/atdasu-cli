@@ -1,6 +1,6 @@
 use crate::handlers::Manager;
 
-use super::super::handlers::{ CommandManager, Command };
+use crate::handlers::{ CommandManager, Command };
 
 const NAME: &str = env!("CARGO_PKG_NAME");
 
