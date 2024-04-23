@@ -18,7 +18,8 @@ fn main() {
         "test" => test(),
         "help" => help(command_args, manager),
         _ => {
-            println!("No command was provided. Try using {NAME} ? or {NAME} help.");
+            let error_msg: String = format!("No command was provided. Try using {} help.", NAME);
+            println!("{}", error_msg);
             process::exit(1)
         }
     }

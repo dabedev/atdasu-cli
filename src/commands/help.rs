@@ -24,8 +24,11 @@ pub fn run(args: Vec<String>, manager: CommandManager) {
                 let command_msg: String = format_msg(cmd);
                 println!("{}", command_msg)
             } else {
-                let unknown_msg: String =
-                    format!("Unknown command: {}. Try using {NAME} help.", cmd);
+                let unknown_msg: String = format!(
+                    "Unknown command: {}. Try using {} help.",
+                    cmd,
+                    NAME
+                );
                 println!("{}", unknown_msg)
             }
         }
