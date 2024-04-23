@@ -3,11 +3,14 @@ use std::fs;
 use crate::handlers::commands::{ Command, CommandManager, Manager };
 use serde::Deserialize;
 
+const NAME: &str = env!("CARGO_PKG_NAME");
+
 #[derive(Debug, Deserialize)]
 struct CommandData {
     name: String,
-    shortname: String,
+    shortname: Vec<String>,
     description: String,
+    usage: String,
 }
 
 pub fn load_commands(manager: &mut CommandManager) {
@@ -23,14 +26,18 @@ pub fn load_commands(manager: &mut CommandManager) {
                     ::read_to_string(&path)
                     .expect("Failed to read command data from file");
 
-                let parsed_data: CommandData = toml
+                let mut parsed_data: CommandData = toml
                     ::from_str(&command_data)
                     .expect("Failed to parse TOML data");
+
+                parsed_data.usage = parsed_data.usage.replace("%cli%", NAME);
+                parsed_data.usage = parsed_data.usage.replace("%cmd_name%", &parsed_data.name);
 
                 let command = Command {
                     name: parsed_data.name,
                     shortname: parsed_data.shortname,
                     description: parsed_data.description,
+                    usage: parsed_data.usage,
                 };
 
                 manager.add_command(command);
