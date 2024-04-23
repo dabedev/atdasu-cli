@@ -10,7 +10,7 @@ fn parse_args() -> Vec<String> {
 
 pub fn parse_command() -> Result<String, String> {
     let args: Vec<String> = parse_args();
-    let error_msg: String = format!("No command was provided. Try using {NAME} ? or {NAME} help.");
+    let error_msg: String = format!("No command was provided. Try using {NAME} help.");
     let command: String = args.get(0).expect(error_msg.as_str()).to_string();
     Ok(command)
 }
