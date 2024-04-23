@@ -1,3 +1,4 @@
+const NAME: &str = env!("CARGO_PKG_NAME");
 pub struct Command {
     pub name: String,
     pub shortname: String,
@@ -33,7 +34,7 @@ impl Manager for CommandManager {
     fn get_command(&self, arg: String) -> Option<&Command> {
         let cmd_arg: String = arg.clone();
         let predicate = |cmd: &&Command| (cmd.name == cmd_arg || cmd.shortname == cmd_arg);
-        let unknown_msg: String = format!("Unknown command: {}", cmd_arg);
+        let unknown_msg: String = format!("Unknown command: {}. Try using {} help.", cmd_arg, NAME);
         let cmd: &&Command = &self.commands.iter().find(predicate).expect(&unknown_msg);
         Some(cmd)
     }
