@@ -24,6 +24,7 @@ impl CommandManager {
 pub trait Manager {
     fn add_command(&mut self, cmd: Command);
     fn get_command(&self, arg: String) -> Option<&Command>;
+    fn get_commands(&self) -> &Vec<Command>;
 }
 
 impl Manager for CommandManager {
@@ -37,5 +38,9 @@ impl Manager for CommandManager {
         let unknown_msg: String = format!("Unknown command: {}. Try using {} help.", cmd_arg, NAME);
         let cmd: &&Command = &self.commands.iter().find(predicate).expect(&unknown_msg);
         Some(cmd)
+    }
+
+    fn get_commands(&self) -> &Vec<Command> {
+        &self.commands
     }
 }

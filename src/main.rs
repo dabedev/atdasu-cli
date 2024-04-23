@@ -1,4 +1,4 @@
-use dasu::handlers::{ self, Manager, Command, CommandManager };
+use dasu::handlers::{ self, parse_command_args, Command, CommandManager, Manager };
 use dasu::commands::{ test, help };
 use std::process;
 
@@ -13,9 +13,10 @@ fn main() {
     });
     let command: &Command = manager.get_command(command).expect("No valid command was provided.");
     let command: &str = command.name.as_str();
+    let command_args: Vec<String> = parse_command_args();
     match command {
         "test" => test(),
-        "help" => help(),
+        "help" => help(command_args, manager),
         _ => {
             println!("No command was provided. Try using {NAME} ? or {NAME} help.");
             process::exit(1)

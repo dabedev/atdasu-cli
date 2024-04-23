@@ -14,3 +14,9 @@ pub fn parse_command() -> Result<String, String> {
     let command: String = args.get(0).expect(error_msg.as_str()).to_string();
     Ok(command)
 }
+
+pub fn parse_command_args() -> Vec<String> {
+    let mut args: Vec<String> = parse_args();
+    args.remove(0);
+    args
+}
