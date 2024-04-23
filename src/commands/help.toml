@@ -1,4 +1,4 @@
 name="help"
-shortname=["-h", "?"]
+shortname=["h", "?"]
 description="This is the help command"
 usage="%cli% %cmd_name% <command>"

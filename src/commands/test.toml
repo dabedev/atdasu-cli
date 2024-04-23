@@ -1,4 +1,4 @@
 name="test"
-shortname=["t", "?"]
+shortname=["t"]
 description="This is a test command"
 usage="%cli% %cmd_name%"
