@@ -1,15 +1,13 @@
-use crate::handlers::Manager;
-
-use crate::handlers::{ CommandManager, Command };
+use crate::handlers::{ CommandManager, Command, Manager };
 
 const NAME: &str = env!("CARGO_PKG_NAME");
 
 fn format_msg(cmd: &Command) -> String {
     let command_msg: String = format!(
-        "{} - {}\nAlias: {}\nUsage: {}\n",
+        "{} - {}\nAlias: {}\nUsage: {}",
         cmd.name,
         cmd.description,
-        cmd.shortname.join(", "),
+        cmd.alias.join(", "),
         cmd.usage
     );
     command_msg
@@ -33,14 +31,15 @@ pub fn run(args: Vec<String>, manager: CommandManager) {
             }
         }
         _ => {
-            let commands_list: &Vec<Command> = manager.get_commands();
+            let mut commands_list: Vec<Command> = manager.get_commands().to_vec();
             let mut commands_msg: Vec<String> = Vec::new();
+            commands_list.sort_by(|a, b| b.priority.cmp(&a.priority));
             for command in commands_list {
-                let push_msg: String = format_msg(command);
+                let push_msg: String = format_msg(&command);
                 commands_msg.push(push_msg);
             }
-            let commands_msg: String = commands_msg.join("\n");
-            print!("{}\n", commands_msg)
+            let commands_msg: String = commands_msg.join("\n\n");
+            println!("{}", commands_msg)
         }
     }
 }

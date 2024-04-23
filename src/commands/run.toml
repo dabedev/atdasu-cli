@@ -1,0 +1,5 @@
+name="run"
+alias=[]
+description="This is the run command"
+usage="%cli% %cmd_name% <command>"
+priority=2

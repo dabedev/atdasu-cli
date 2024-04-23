@@ -1,5 +1,5 @@
 use dasu::handlers::{ self, parse_command_args, Command, CommandManager, Manager };
-use dasu::commands::{ test, help };
+use dasu::commands::{ version, help, run };
 use std::process;
 
 const NAME: &str = env!("CARGO_PKG_NAME");
@@ -15,7 +15,8 @@ fn main() {
     let command: &str = command.name.as_str();
     let command_args: Vec<String> = parse_command_args();
     match command {
-        "test" => test(),
+        "run" => run(command_args),
+        "version" => version(),
         "help" => help(command_args, manager),
         _ => {
             let error_msg: String = format!("No command was provided. Try using {} help.", NAME);

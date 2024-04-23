@@ -8,9 +8,10 @@ const NAME: &str = env!("CARGO_PKG_NAME");
 #[derive(Debug, Deserialize)]
 struct CommandData {
     name: String,
-    shortname: Vec<String>,
+    alias: Vec<String>,
     description: String,
     usage: String,
+    priority: u8,
 }
 
 pub fn load_commands(manager: &mut CommandManager) {
@@ -35,9 +36,10 @@ pub fn load_commands(manager: &mut CommandManager) {
 
                 let command = Command {
                     name: parsed_data.name,
-                    shortname: parsed_data.shortname,
+                    alias: parsed_data.alias,
                     description: parsed_data.description,
                     usage: parsed_data.usage,
+                    priority: parsed_data.priority,
                 };
 
                 manager.add_command(command);

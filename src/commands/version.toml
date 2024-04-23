@@ -1,0 +1,5 @@
+name="version"
+alias=["-v", "--version"]
+description="This is a version command"
+usage="%cli% %cmd_name%"
+priority=1
