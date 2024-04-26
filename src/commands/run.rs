@@ -13,6 +13,7 @@ pub fn run(args: Vec<String>) {
     match result {
         output => {
             let output: Vec<u8> = output.stdout;
+
             let mut new_output: String = String::new();
 
             for key in output {
