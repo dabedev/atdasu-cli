@@ -11,8 +11,12 @@ fn parse_args() -> Vec<String> {
 pub fn parse_command() -> Result<String, String> {
     let args: Vec<String> = parse_args();
     let error_msg: String = format!("No command was provided. Try using {} help.", NAME);
-    let command: String = args.get(0).expect(error_msg.as_str()).to_string();
-    Ok(command)
+    let command: Option<&String> = args.get(0);
+    if let Some(command) = command {
+        Ok(command.to_owned())
+    } else {
+        Err(error_msg)
+    }
 }
 
 pub fn parse_command_args() -> Vec<String> {
